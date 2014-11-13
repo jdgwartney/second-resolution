@@ -10,21 +10,33 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Why One Second Matters?"),
 
   # Sidebar with a slider input for number of bins
-  sidebarLayout(
+  sidebarLayout(position="right",
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
+      sliderInput("signalFrequency",
+                  "Signal Frequency (hz):",
+                  min = 1/30,
+                  max = 1,
+                  value = 0.5),
+      sliderInput("sampleFrequency1",
+                  "Sample Frequency (hz) #1",
                   min = 1,
-                  max = 50,
-                  value = 30)
+                  max = 300,
+                  value = 60),
+      sliderInput("sampleFrequency2",
+                  "Sample Frequency (hz) #2",
+                  min = 1,
+                  max = 300,
+                  value = 60)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("signalPlot"),
+      plotOutput("samplePlot1"),
+      plotOutput("samplePlot2")
     )
   )
 ))
